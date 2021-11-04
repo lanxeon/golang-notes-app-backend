@@ -5,20 +5,13 @@ import (
 	"net/http"
 	"time"
 
+	. "notes_app/models"
+
 	gin "github.com/gin-gonic/gin"
 	pg "github.com/go-pg/pg/v9"
 	orm "github.com/go-pg/pg/v9/orm"
 	guuid "github.com/google/uuid"
 )
-
-type Note struct {
-	ID        string    `json:"id"`
-	Title     string    `json:"title"`
-	Body      string    `json:"body"`
-	Completed string    `json:"completed"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
-}
 
 // db instance to make db changes
 var dbConnect *pg.DB

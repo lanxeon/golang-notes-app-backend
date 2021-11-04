@@ -4,6 +4,7 @@ import (
 	"log"
 
 	config "notes_app/config"
+	middlewares "notes_app/middlewares"
 	routes "notes_app/routes"
 
 	gin "github.com/gin-gonic/gin"
@@ -16,6 +17,9 @@ func main() {
 
 	// Init Router
 	router := gin.Default()
+
+	// CORS middleware
+	router.Use(middlewares.Cors)
 
 	// Route Handlers / Endpoints
 	routes.Routes(router)
