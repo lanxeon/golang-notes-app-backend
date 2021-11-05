@@ -73,13 +73,23 @@ func CreateNote(c *gin.Context) {
 
 	title := note.Title
 	body := note.Body
-	completed := note.Completed
+	noteType := note.Type
+	completed := false
 	id := guuid.New().String()
+
+	if noteType != "HOME" && noteType != "PERSONAL" && noteType != "WORK" {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status":  http.StatusBadRequest,
+			"message": "Please select a valid type for the note",
+		})
+		return
+	}
 
 	insertError := dbConnect.Insert(&Note{
 		ID:        id,
 		Title:     title,
 		Body:      body,
+		Type:      noteType,
 		Completed: completed,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
